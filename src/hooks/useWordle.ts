@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-interface FormattedGuess {
+export interface FormattedGuess {
   key: string
   color: string
 }
