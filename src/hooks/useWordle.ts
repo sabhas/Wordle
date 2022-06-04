@@ -8,7 +8,7 @@ interface FormattedGuess {
 const useWordle = (solution: string) => {
   const [turn, setTurn] = useState(0)
   const [currentGuess, setCurrentGuess] = useState("")
-  const [guesses, setGuesses] = useState<FormattedGuess[][]>(Array(5)) // each guess is an array
+  const [guesses, setGuesses] = useState<FormattedGuess[][]>([...Array(5)]) // each guess is an array
   const [history, setHistory] = useState<string[]>([]) // each guess is a string
   const [isCorrect, setIsCorrect] = useState(false)
 
