@@ -9,9 +9,9 @@ type RowProps = {
 export default function Row({ guess, currentGuess }: RowProps) {
   if (guess) {
     return (
-      <div className="row past">
+      <div className="grid-row">
         {guess.map((l, i) => (
-          <div key={i} className={l.color}>
+          <div key={i} className={`cell ${l.color}`}>
             {l.key}
           </div>
         ))}
@@ -23,26 +23,26 @@ export default function Row({ guess, currentGuess }: RowProps) {
     const letters = currentGuess.split("")
 
     return (
-      <div className="row current">
+      <div className="grid-row">
         {letters.map((letter, i) => (
-          <div key={i} className="filled">
+          <div key={i} className="cell filled">
             {letter}
           </div>
         ))}
         {[...Array(5 - letters.length)].map((_, i) => (
-          <div key={i}></div>
+          <div key={i} className="cell"></div>
         ))}
       </div>
     )
   }
 
   return (
-    <div className="row">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
+    <div className="grid-row">
+      <div className="cell"></div>
+      <div className="cell"></div>
+      <div className="cell"></div>
+      <div className="cell"></div>
+      <div className="cell"></div>
     </div>
   )
 }
