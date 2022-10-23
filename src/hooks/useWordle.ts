@@ -81,9 +81,8 @@ const useWordle = (solution: string) => {
     setCurrentGuess("")
   }
 
-  // handle keyup event & track current guess
-  // if user presses enter, add the new guess
-  const handleKeyup = ({ key }: KeyboardEvent) => {
+  // track current guess and if user presses enter, add the new guess
+  const updateCurrentGuess = (key: string) => {
     if (key === "Enter") {
       if (turn === 5) {
         console.log("you used all your guesses!")
@@ -113,7 +112,14 @@ const useWordle = (solution: string) => {
     }
   }
 
-  return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup }
+  return {
+    turn,
+    currentGuess,
+    guesses,
+    isCorrect,
+    usedKeys,
+    updateCurrentGuess,
+  }
 }
 
 export default useWordle

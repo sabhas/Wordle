@@ -9,11 +9,20 @@ type WordleProps = {
 }
 
 export default function Wordle({ solution }: WordleProps) {
-  const { currentGuess, guesses, turn, isCorrect, usedKeys, handleKeyup } =
-    useWordle(solution)
+  const {
+    currentGuess,
+    guesses,
+    turn,
+    isCorrect,
+    usedKeys,
+    updateCurrentGuess,
+  } = useWordle(solution)
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
+    // handle keyup event
+    const handleKeyup = ({ key }: KeyboardEvent) => updateCurrentGuess(key)
+
     window.addEventListener("keyup", handleKeyup)
 
     if (isCorrect) {
@@ -26,12 +35,14 @@ export default function Wordle({ solution }: WordleProps) {
     }
 
     return () => window.removeEventListener("keyup", handleKeyup)
-  }, [handleKeyup, isCorrect, turn])
+  }, [updateCurrentGuess, isCorrect, turn])
+
+  const handleClick = (key: string) => updateCurrentGuess(key)
 
   return (
     <div>
       <Grid guesses={guesses} currentGuess={currentGuess} turn={turn} />
-      <Keypad usedKeys={usedKeys} />
+      <Keypad usedKeys={usedKeys} handleClick={handleClick} />
       {showModal && (
         <Modal isCorrect={isCorrect} turn={turn} solution={solution} />
       )}
